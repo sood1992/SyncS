@@ -333,6 +333,11 @@ def compute_audio_hash(audio: np.ndarray, sample_rate: int = 8000) -> str:
     """Compute simple hash of audio for caching purposes."""
     import hashlib
 
+    if len(audio) == 0:
+        return "empty"
+
     # Use first and last samples plus length
-    data = f"{len(audio)}:{audio[:100].tobytes()}:{audio[-100:].tobytes()}"
+    head = audio[:min(100, len(audio))]
+    tail = audio[-min(100, len(audio)):]
+    data = f"{len(audio)}:{head.tobytes()}:{tail.tobytes()}"
     return hashlib.md5(data.encode()).hexdigest()[:16]

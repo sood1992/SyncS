@@ -57,6 +57,10 @@ def gcc_phat(
     sig = np.asarray(sig, dtype=np.float64)
     ref = np.asarray(ref, dtype=np.float64)
 
+    # Guard against empty arrays
+    if len(sig) == 0 or len(ref) == 0:
+        return 0.0, 0.0
+
     # Pad to sum of lengths for full correlation
     n = len(sig) + len(ref)
 

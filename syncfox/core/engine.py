@@ -299,6 +299,9 @@ class SyncEngine:
             project: Project with clips.
         """
         total = len(project.clips)
+        if total == 0:
+            self._report_progress("extract", 1.0, "No clips to extract")
+            return
 
         for i, clip in enumerate(project.clips):
             clip.status = ClipStatus.EXTRACTING
@@ -350,6 +353,14 @@ class SyncEngine:
         ref_audio = project.reference_clip.audio
         clips_to_sync = [c for c in project.clips if c != project.reference_clip]
         total = len(clips_to_sync)
+
+        if total == 0:
+            # Only reference clip in project
+            project.reference_clip.sync_offset = 0.0
+            project.reference_clip.sync_confidence = 1.0
+            project.reference_clip.status = ClipStatus.SYNCED
+            self._report_progress("sync", 1.0, "No clips to sync")
+            return
 
         for i, clip in enumerate(clips_to_sync):
             if clip.audio is None:
@@ -444,6 +455,10 @@ class SyncEngine:
         ]
         total = len(synced_clips)
 
+        if total == 0:
+            self._report_progress("drift", 1.0, "No clips to analyze")
+            return
+
         for i, clip in enumerate(synced_clips):
             if clip.audio is None:
                 continue
@@ -514,6 +529,10 @@ class SyncEngine:
             if abs(c.drift_rate) > 1e-6 and c.status == ClipStatus.SYNCED
         ]
         total = len(clips_to_correct)
+
+        if total == 0:
+            self._report_progress("drift_correct", 1.0, "No clips need drift correction")
+            return
 
         for i, clip in enumerate(clips_to_correct):
             self._report_progress(

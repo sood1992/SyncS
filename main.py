@@ -54,6 +54,11 @@ def run_gui() -> int:
 
     from syncfox.ui.main_window import MainWindow
 
+    # Enable high DPI scaling via environment variable (must be set before QApplication)
+    # Note: In Qt6/PySide6, high DPI is enabled by default
+    import os
+    os.environ.setdefault("QT_ENABLE_HIGHDPI_SCALING", "1")
+
     # Create application
     app = QApplication(sys.argv)
     app.setApplicationName("SyncFox")
@@ -63,10 +68,6 @@ def run_gui() -> int:
     # Set theme if qfluentwidgets available
     if has_fluent:
         setTheme(Theme.DARK)
-
-    # Enable high DPI scaling
-    app.setAttribute(Qt.ApplicationAttribute.AA_EnableHighDpiScaling, True)
-    app.setAttribute(Qt.ApplicationAttribute.AA_UseHighDpiPixmaps, True)
 
     # Create and show main window
     window = MainWindow()

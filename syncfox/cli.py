@@ -161,10 +161,15 @@ def cmd_sync(args: argparse.Namespace) -> int:
     # Run sync
     print("\nStarting sync...")
 
-    output_dir = Path(args.output) if args.output else None
+    # Drift-corrected files go to a subdirectory next to the output timeline
+    # or to a temp directory if no output specified
+    drift_output_dir = None
+    if args.output and args.drift_correction:
+        output_path = Path(args.output)
+        drift_output_dir = output_path.parent / "drift_corrected"
 
     try:
-        engine.run_full_sync(project, output_dir)
+        engine.run_full_sync(project, drift_output_dir)
     except Exception as e:
         progress.close()
         print(f"\nError during sync: {e}")

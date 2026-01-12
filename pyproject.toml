@@ -33,7 +33,6 @@ dependencies = [
     "scipy>=1.10",
     "librosa>=0.10",
     "PySide6>=6.5",
-    "PyQt-Fluent-Widgets>=1.4",
     "opentimelineio>=0.15",
     "pyacoustid>=1.2",
     "tqdm>=4.65",

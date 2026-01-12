@@ -1,6 +1,6 @@
 """Main application window for SyncFox.
 
-Uses PySide6 with qfluentwidgets for Fluent Design UI.
+Uses PySide6 for the GUI. qfluentwidgets is disabled as it requires PyQt5.
 """
 
 from pathlib import Path
@@ -17,30 +17,18 @@ from PySide6.QtWidgets import (
     QFileDialog,
     QMessageBox,
     QApplication,
+    QPushButton,
+    QToolButton,
+    QProgressBar,
 )
 
-try:
-    from qfluentwidgets import (
-        FluentIcon,
-        PrimaryPushButton,
-        PushButton,
-        ToolButton,
-        InfoBar,
-        InfoBarPosition,
-        ProgressBar,
-        CommandBar,
-        Action,
-        setTheme,
-        Theme,
-    )
-    HAS_FLUENT = True
-except ImportError:
-    HAS_FLUENT = False
-    # Fallback to standard widgets
-    from PySide6.QtWidgets import QPushButton as PrimaryPushButton
-    from PySide6.QtWidgets import QPushButton as PushButton
-    from PySide6.QtWidgets import QToolButton as ToolButton
-    from PySide6.QtWidgets import QProgressBar as ProgressBar
+# qfluentwidgets requires PyQt5 and is incompatible with PySide6
+# Use standard PySide6 widgets instead
+HAS_FLUENT = False
+PrimaryPushButton = QPushButton
+PushButton = QPushButton
+ToolButton = QToolButton
+ProgressBar = QProgressBar
 
 from ..core.engine import (
     SyncEngine,

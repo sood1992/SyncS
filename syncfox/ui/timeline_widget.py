@@ -15,13 +15,10 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtGui import QPainter, QColor, QPen, QBrush, QFont, QPainterPath
 
-try:
-    from qfluentwidgets import SubtitleLabel, Slider
-    HAS_FLUENT = True
-except ImportError:
-    HAS_FLUENT = False
-    SubtitleLabel = QLabel
-    Slider = QSlider
+# Use standard PySide6 widgets (qfluentwidgets requires PyQt5)
+HAS_FLUENT = False
+SubtitleLabel = QLabel
+Slider = QSlider
 
 logger = logging.getLogger(__name__)
 

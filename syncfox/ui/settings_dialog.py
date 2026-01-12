@@ -22,25 +22,14 @@ from PySide6.QtWidgets import (
     QDoubleSpinBox,
 )
 
-try:
-    from qfluentwidgets import (
-        ComboBox,
-        CheckBox,
-        Slider,
-        LineEdit,
-        PushButton,
-        SpinBox,
-        DoubleSpinBox,
-    )
-    HAS_FLUENT = True
-except ImportError:
-    HAS_FLUENT = False
-    ComboBox = QComboBox
-    CheckBox = QCheckBox
-    Slider = QSlider
-    LineEdit = QLineEdit
-    PushButton = QPushButton
-    DoubleSpinBox = QDoubleSpinBox
+# Use standard PySide6 widgets (qfluentwidgets requires PyQt5)
+HAS_FLUENT = False
+ComboBox = QComboBox
+CheckBox = QCheckBox
+Slider = QSlider
+LineEdit = QLineEdit
+PushButton = QPushButton
+DoubleSpinBox = QDoubleSpinBox
 
 from ..core.cache import AudioCache
 

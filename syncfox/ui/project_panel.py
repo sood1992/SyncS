@@ -17,13 +17,10 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtGui import QColor, QIcon, QAction
 
-try:
-    from qfluentwidgets import TreeWidget, SubtitleLabel
-    HAS_FLUENT = True
-except ImportError:
-    HAS_FLUENT = False
-    TreeWidget = QTreeWidget
-    SubtitleLabel = QLabel
+# Use standard PySide6 widgets (qfluentwidgets requires PyQt5)
+HAS_FLUENT = False
+TreeWidget = QTreeWidget
+SubtitleLabel = QLabel
 
 from ..core.engine import MediaClip, ClipStatus
 

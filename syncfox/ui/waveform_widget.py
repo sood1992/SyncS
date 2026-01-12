@@ -14,12 +14,9 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtGui import QPainter, QColor, QPen, QPainterPath
 
-try:
-    from qfluentwidgets import SubtitleLabel
-    HAS_FLUENT = True
-except ImportError:
-    HAS_FLUENT = False
-    SubtitleLabel = QLabel
+# Use standard PySide6 widgets (qfluentwidgets requires PyQt5)
+HAS_FLUENT = False
+SubtitleLabel = QLabel
 
 logger = logging.getLogger(__name__)
 

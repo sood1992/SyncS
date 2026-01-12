@@ -39,18 +39,10 @@ def run_gui() -> int:
     """
     try:
         from PySide6.QtWidgets import QApplication
-        from PySide6.QtCore import Qt
     except ImportError:
         print("Error: PySide6 is required for GUI mode.")
         print("Install with: pip install PySide6")
         return 1
-
-    # Try to import qfluentwidgets for Fluent Design
-    try:
-        from qfluentwidgets import setTheme, Theme
-        has_fluent = True
-    except ImportError:
-        has_fluent = False
 
     from syncfox.ui.main_window import MainWindow
 
@@ -64,10 +56,6 @@ def run_gui() -> int:
     app.setApplicationName("SyncFox")
     app.setOrganizationName("SyncFox")
     app.setOrganizationDomain("syncfox.app")
-
-    # Set theme if qfluentwidgets available
-    if has_fluent:
-        setTheme(Theme.DARK)
 
     # Create and show main window
     window = MainWindow()

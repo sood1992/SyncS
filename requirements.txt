@@ -7,7 +7,7 @@ librosa>=0.10
 
 # GUI
 PySide6>=6.5
-PyQt-Fluent-Widgets>=1.4
+# Note: PyQt-Fluent-Widgets removed - requires PyQt5, incompatible with PySide6
 
 # Timeline
 opentimelineio>=0.15
